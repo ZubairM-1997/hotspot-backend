@@ -8,8 +8,7 @@ const geoLocation = mongoose.Schema({
 		default: "Point"
 	},
 	coordinates: {
-		type: [Number],
-		index: "2dsphere"
+		type: [Number]
 	}
 })
 
@@ -19,7 +18,7 @@ const DestinationSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	geometry: geoLocation,
+	location: geoLocation,
 	user: {
 		type: mongoose.Schema.Types.ObjectId, ref: 'user'
 	}

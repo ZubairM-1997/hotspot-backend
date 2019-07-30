@@ -1,4 +1,4 @@
 {
-	"mongoURI": "mongodb+srv://Zubair97:{PASSWORD}@cluster0-epauj.mongodb.net/test?retryWrites=true&w=majority",
+	"mongoURI": "mongodb+srv://Zubair97:qlW41vjVE@cluster0-epauj.mongodb.net/test?retryWrites=true&w=majority",
 	"jwtSecret": "secret"
 }

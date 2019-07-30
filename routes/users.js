@@ -8,7 +8,7 @@ const User = require("../models/User.js")
 const config = require("config")
 const auth = require('../middleware/auth')
 
-
+const Destination = require('../models/Destination');
 
 
 
@@ -37,32 +37,32 @@ router.get('/', auth,  async (req, res) => {
 //makes sure that the name, email and password are present
 
 router.post('/', [
-	check('name', 'name is required').not().isEmpty(),
-	check('username', 'please enter a username').not().isEmpty(),
+	check('name', 'Please enter your name').not().isEmpty(),
 	check('email', 'Please enter a valid email').isEmail(),
 	check('password', 'please enter a password with 6 or more characters').isLength({min: 6})
-
-
 ], async (req, res) => {
 
 
 	const errors = validationResult(req);
 	if(!errors.isEmpty()) {
+		console.log("ERROR")
 		return res.status(400).json({errors: errors.array() });
 	}
 
-	const {name, email, username,  password} = req.body;
+	const {name, email, password} = req.body;
 
 	try {
 		let user = await User.findOne({ email});
 
 		if(user) {
-			return res.status(400).json({message: "User already exists"});
+
+			return res.status(400).json({message: "User already exists", status: 400});
 		}
+
+
 
 		user = new User({
 			name,
-			username,
 			email,
 			password
 		})
@@ -96,7 +96,11 @@ router.post('/', [
 }
 );
 
-
+process.on('unhandledRejection', (reason, promise) => {
+	console.log('Unhandled Rejection at:', reason.stack || reason)
+	// Recommended: send the information to sentry.io
+	// or whatever crash reporting service you use
+  })
 
 
 
