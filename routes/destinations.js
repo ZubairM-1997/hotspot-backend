@@ -49,7 +49,7 @@ router.post('/', [auth, [
 
 
 		const destination = await newDestination.save();
-		return res.status(200).json({name: destination.name, location: destination.location, _id: destination._id})
+		return res.status(200).json({name: destination.name, location: destination.location, _id: destination._id, status: 200})
 
 	} catch(err) {
 		console.error(err.message)
